@@ -20,7 +20,8 @@ if [ ! $EMP_NODENAME ]; then
 	read -p "Enter node name: " EMP_NODENAME
 	echo 'export EMP_NODENAME='$EMP_NODENAME >> $HOME/.bash_profile
 fi
-EMP_PORT=39
+read -p "Enter node port: " EMP_PORT
+echo 'export EMP_PORT='$EMP_PORT >> $HOME/.bash_profile
 if [ ! $WALLET ]; then
 	echo "export WALLET=wallet" >> $HOME/.bash_profile
 fi
