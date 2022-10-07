@@ -14,7 +14,6 @@ echo -e "\e[0m"
 
 sleep 2
 
-curl l
 
 # set vars
 if [ ! $EMP_NODENAME ]; then
