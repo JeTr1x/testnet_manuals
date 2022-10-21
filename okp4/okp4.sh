@@ -59,7 +59,7 @@ go version
 echo -e "\e[1m\e[32m3. Downloading and building binaries... \e[0m" && sleep 1
 # download binary
 cd $HOME
-git clone git@github.com:okp4/okp4d.git
+git clone https://github.com/okp4/okp4d.git
 cd okp4d
 make install
 okp4d version
