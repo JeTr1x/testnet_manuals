@@ -23,7 +23,7 @@ if [ ! $GIT_PORT ]; then
 	echo 'export GIT_PORT='$GIT_PORT >> $HOME/.bash_profile
 fi
 echo "export WALLET=wallet" >> $HOME/.bash_profile
-echo "export GITCHAIN_ID=gitopia-janus-testnet" >> $HOME/.bash_profile
+echo "export GITCHAIN_ID=gitopia-janus-testnet-2" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
 echo '================================================='
