@@ -61,7 +61,7 @@ echo -e "\e[1m\e[32m3. Downloading and building binaries... \e[0m" && sleep 1
 cd $HOME
 git clone https://github.com/haqq-network/haqq.git
 cd haqq
-git checkout 1.2.1
+git checkout v1.2.1
 make install
 
 # config
