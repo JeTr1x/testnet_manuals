@@ -37,7 +37,7 @@ Explorer:
 ### Option 1 (automatic)
 You can setup your defund fullnode in few minutes by using automated script below. It will prompt you to input your validator node name!
 ```
-wget -O defund.sh https://raw.githubusercontent.com/kj89/testnet_manuals/main/defund/defund.sh && chmod +x defund.sh && ./defund.sh
+wget -O defund.sh https://raw.githubusercontent.com/JeTr1x/testnet_manuals/main/defund/defund.sh && chmod +x defund.sh && ./defund.sh
 ```
 
 ### Option 2 (manual)
