@@ -115,6 +115,17 @@ sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.celestia-app/config/c
 # reset
 celestia-appd tendermint unsafe-reset-all --home $HOME/.celestia-app
 
+cd $HOME
+rm -rf ~/.celestia-app/data
+mkdir -p ~/.celestia-app/data
+SNAP_NAME=$(curl -s https://snaps.qubelabs.io/celestia/ | \
+    egrep -o ">mocha.*tar" | tr -d ">")
+wget -O - https://snaps.qubelabs.io/celestia/${SNAP_NAME} | tar xf - \
+    -C ~/.celestia-app/data/
+
+
+
+
 echo -e "\e[1m\e[32m4. Starting service... \e[0m" && sleep 1
 # create service
 sudo tee /etc/systemd/system/celestiad.service > /dev/null <<EOF
