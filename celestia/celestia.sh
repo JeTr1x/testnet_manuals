@@ -20,7 +20,7 @@ if [ ! $CLST_NODENAME ]; then
 	echo 'export CLST_NODENAME='$CLST_NODENAME >> $HOME/.bash_profile
 fi
 if [ ! $CLST_PORT ]; then
-	read -p "Enter node name: " CLST_PORT
+	read -p "Enter port number: " CLST_PORT
 	echo 'export CLST_PORT='$CLST_PORT >> $HOME/.bash_profile
 fi
 if [ ! $WALLET ]; then
