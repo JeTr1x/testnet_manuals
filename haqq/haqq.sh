@@ -24,7 +24,7 @@ HAQQ_PORT=16
 if [ ! $WALLET ]; then
 	echo "export WALLET=wallet" >> $HOME/.bash_profile
 fi
-echo "export HAQQ_CHAIN_ID=haqq_54211-2" >> $HOME/.bash_profile
+echo "export HAQQ_CHAIN_ID=haqq_54211-3" >> $HOME/.bash_profile
 echo "export HAQQ_PORT=${HAQQ_PORT}" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
