@@ -48,6 +48,7 @@ make install
 
 nolusd config node tcp://localhost:${NOLUS_PORT}657
 nolusd config chain-id $NOLUS_CHAIN_ID
+nolusd config keyring-backend test
 nolusd init $NOLUS_MONIKER --chain-id $NOLUS_CHAIN_ID
 
 curl https://raw.githubusercontent.com/Nolus-Protocol/nolus-networks/main/testnet/nolus-rila/genesis.json > ~/.nolus/config/genesis.json
