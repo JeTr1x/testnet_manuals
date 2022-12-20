@@ -30,7 +30,7 @@ sleep 2
 sudo apt-get install -y build-essential
 
 cd $HOME
-VER="1.19.3"
+VER="1.18.3"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
 rm -rf  "go$VER.linux-amd64.tar.gz"
