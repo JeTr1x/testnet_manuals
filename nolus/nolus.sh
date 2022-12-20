@@ -97,5 +97,5 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable nolusd
-sudo systemctl restart nolusd && sudo journalctl -u nolusd -f
+sudo systemctl restart nolusd && sudo journalctl -u nolusd -f -o cat
 
