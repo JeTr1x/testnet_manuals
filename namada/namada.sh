@@ -3,7 +3,7 @@ if [ ! $VALIDATOR_ALIAS ]; then
 	read -p "Enter node name: " VALIDATOR_ALIAS
 	echo 'export VALIDATOR_ALIAS='$VALIDATOR_ALIAS >> $HOME/.bash_profile
 fi
-echo "export NAMADA_TAG=v0.12.1" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.12.2" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
 echo "export NAM_CHAIN_ID=public-testnet-1.0.05ab4adb9db" >> ~/.bash_profile
 source ~/.bash_profile
