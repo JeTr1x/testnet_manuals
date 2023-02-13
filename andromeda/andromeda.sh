@@ -36,6 +36,7 @@ cd
 
 andromedad config chain-id galileo-3
 andromedad config keyring-backend test
+andromedad config node tcp://localhost:${AND_PORT}657
 
 andromedad init $MONIKER_AND --chain-id galileo-3
 
