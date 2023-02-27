@@ -25,7 +25,7 @@ if [ ! $NIBIRU_PORT ]; then
 	read -p "Enter node port: " NIBIRU_PORT
 	echo 'export NIBIRU_PORT='$NIBIRU_PORT >> $HOME/.bash_profile
 fi
-echo "export NIBIRU_CHAIN_ID=nibiru-testnet-2" >> $HOME/.bash_profile
+echo "export NIBIRU_CHAIN_ID=nibiru-itn-1" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
 echo '================================================='
@@ -56,15 +56,16 @@ if ! [ -x "$(command -v go)" ]; then
   source ~/.bash_profile
 fi
 
-mv $HOME/.nibid/config $HOME/nibid-backup
+sudo systemctl stop nibid
+mv $HOME/.nibid/config $HOME/nibidt2-backup
 rm -rf .nibid
 
 echo -e "\e[1m\e[32m3. Downloading and building binaries... \e[0m" && sleep 1
 # download binary
-cd $HOME && rm -rf nibiru
+cd $HOME && rm -rf nibiru 
 git clone https://github.com/NibiruChain/nibiru.git
 cd nibiru
-git checkout v0.16.2
+git checkout v0.19.2
 make install
 
 # config
@@ -76,11 +77,28 @@ nibid config node tcp://localhost:${NIBIRU_PORT}657
 nibid init $NIBIRU_NODENAME --chain-id $NIBIRU_CHAIN_ID
 
 # download genesis and addrbook
-curl -Ls https://snapshots.kjnodes.com/nibiru-testnet/genesis.json > $HOME/.nibid/config/genesis.json
-curl -Ls https://snapshots.kjnodes.com/nibiru-testnet/addrbook.json > $HOME/.nibid/config/addrbook.json
+wget -O $HOME/.nibid/config/genesis.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Nibiru/genesis.json"
+wget -O $HOME/.nibid/config/addrbook.json "https://share.utsa.tech/nibiru/addrbook.json"
 
-# set peers and seeds
-sed -i -e "s|^seeds *=.*|seeds = \"3f472746f46493309650e5a033076689996c8881@nibiru-testnet.rpc.kjnodes.com:39659\"|" $HOME/.nibid/config/config.toml
+sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.025unibi\"/;" ~/.nibid/config/app.toml
+
+# добавляем seeds/bpeers/peers в config.toml
+external_address=$(wget -qO- eth0.me)
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/" $HOME/.nibid/config/config.toml
+
+peers=""
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.nibid/config/config.toml
+
+seeds=""
+sed -i.bak -e "s/^seeds =.*/seeds = \"$seeds\"/" $HOME/.nibid/config/config.toml
+
+# при необходимости увеличиваем количество входящих и исходящих пиров для подключения, за исключением постоянных пиров в config.toml
+# может помочь при падении ноды, но увеличивает нагрузку
+sed -i 's/max_num_inbound_peers =.*/max_num_inbound_peers = 50/g' $HOME/.nibid/config/config.toml
+sed -i 's/max_num_outbound_peers =.*/max_num_outbound_peers = 25/g' $HOME/.nibid/config/config.toml
+
+# настраиваем фильтрацию "плохих" peers
+sed -i -e "s/^filter_peers *=.*/filter_peers = \"true\"/" $HOME/.nibid/config/config.toml
 
 # set custom ports
 sed -i.bak -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:${NIBIRU_PORT}658\"%; s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://127.0.0.1:${NIBIRU_PORT}657\"%; s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:${NIBIRU_PORT}060\"%; s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${NIBIRU_PORT}656\"%; s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${NIBIRU_PORT}660\"%" $HOME/.nibid/config/config.toml
