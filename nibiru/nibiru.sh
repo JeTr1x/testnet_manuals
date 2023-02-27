@@ -1,14 +1,5 @@
 #!/bin/bash
 
-echo -e "\033[0;35m"
-echo " :::    ::: ::::::::::: ::::    :::  ::::::::  :::::::::  :::::::::: ::::::::  ";
-echo " :+:   :+:      :+:     :+:+:   :+: :+:    :+: :+:    :+: :+:       :+:    :+: ";
-echo " +:+  +:+       +:+     :+:+:+  +:+ +:+    +:+ +:+    +:+ +:+       +:+        ";
-echo " +#++:++        +#+     +#+ +:+ +#+ +#+    +:+ +#+    +:+ +#++:++#  +#++:++#++ ";
-echo " +#+  +#+       +#+     +#+  +#+#+# +#+    +#+ +#+    +#+ +#+              +#+ ";
-echo " #+#   #+#  #+# #+#     #+#   #+#+# #+#    #+# #+#    #+# #+#       #+#    #+# ";
-echo " ###    ###  #####      ###    ####  ########  #########  ########## ########  ";
-echo -e "\e[0m"
 
 
 sleep 2
@@ -75,6 +66,7 @@ nibid config node tcp://localhost:${NIBIRU_PORT}657
 
 # init
 nibid init $NIBIRU_NODENAME --chain-id $NIBIRU_CHAIN_ID
+nibid tendermint unsafe-reset-all --home $HOME/.nibid
 
 # download genesis and addrbook
 wget -O $HOME/.nibid/config/genesis.json "https://raw.githubusercontent.com/obajay/nodes-Guides/main/Nibiru/genesis.json"
@@ -98,7 +90,7 @@ sed -i 's/max_num_inbound_peers =.*/max_num_inbound_peers = 50/g' $HOME/.nibid/c
 sed -i 's/max_num_outbound_peers =.*/max_num_outbound_peers = 25/g' $HOME/.nibid/config/config.toml
 
 # настраиваем фильтрацию "плохих" peers
-sed -i -e "s/^filter_peers *=.*/filter_peers = \"true\"/" $HOME/.nibid/config/config.toml
+sed -i -e "s/^filter_peers *=.*/filter_peers = \"false\"/" $HOME/.nibid/config/config.toml
 
 # set custom ports
 sed -i.bak -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:${NIBIRU_PORT}658\"%; s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://127.0.0.1:${NIBIRU_PORT}657\"%; s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:${NIBIRU_PORT}060\"%; s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${NIBIRU_PORT}656\"%; s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${NIBIRU_PORT}660\"%" $HOME/.nibid/config/config.toml
@@ -121,7 +113,6 @@ sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0unibi\"/" $HOME/.n
 sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.nibid/config/config.toml
 
 # reset
-nibid tendermint unsafe-reset-all --home $HOME/.nibid
 
 echo -e "\e[1m\e[32m4. Starting service... \e[0m" && sleep 1
 # create service
