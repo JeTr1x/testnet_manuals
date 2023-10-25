@@ -18,7 +18,7 @@ sleep 2
 read -p "Enter node name: " MONIKERNIB
 
 sudo rm -rf /usr/local/go
-curl -Ls https://go.dev/dl/go1.19.12.linux-amd64.tar.gz | sudo tar -xzf - -C /usr/local
+curl -Ls https://go.dev/dl/go1.21.3.linux-amd64.tar.gz | sudo tar -xzf - -C /usr/local
 eval $(echo 'export PATH=$PATH:/usr/local/go/bin' | sudo tee /etc/profile.d/golang.sh)
 eval $(echo 'export PATH=$PATH:$HOME/go/bin' | tee -a $HOME/.profile)
 
@@ -27,7 +27,7 @@ systemctl stop nibid
 rm -rf nibiru .nibid
 git clone https://github.com/NibiruChain/nibiru.git
 cd nibiru
-git checkout v0.21.9
+git checkout v0.21.10
 
 # Build binaries
 make build
@@ -41,7 +41,7 @@ rm -rf build
 sudo ln -s $HOME/.nibid/cosmovisor/genesis $HOME/.nibid/cosmovisor/current -f
 sudo ln -s $HOME/.nibid/cosmovisor/current/bin/nibid /usr/local/bin/nibid -f
 
-go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
+go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 
 # Create service
 sudo tee /etc/systemd/system/nibid.service > /dev/null << EOF
@@ -66,12 +66,12 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable nibid
 
-nibid config chain-id nibiru-itn-2
+nibid config chain-id nibiru-itn-3
 nibid config keyring-backend test
 nibid config node tcp://localhost:13957
 
 # Initialize the node
-nibid init $MONIKERNIB --chain-id nibiru-itn-2
+nibid init $MONIKERNIB --chain-id nibiru-itn-3
 
 # Download genesis and addrbook
 curl -Ls https://snapshots.kjnodes.com/nibiru-testnet/genesis.json > $HOME/.nibid/config/genesis.json
