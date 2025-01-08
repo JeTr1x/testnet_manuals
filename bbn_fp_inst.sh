@@ -35,7 +35,7 @@ sudo journalctl -u eotsd -o cat
 
 fpd init
 read -rp "Enter FPD MNEM: " FPD_MNEM
-echo -e "${FPD_MNEM}\n" | eotsd keys add finality-provider --recover --keyring-backend test
+echo -e "${FPD_MNEM}\n" | fpd keys add finality-provider --recover --keyring-backend test
 
 sleep 3
 
