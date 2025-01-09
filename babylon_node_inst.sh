@@ -31,7 +31,6 @@ sed -i \
   -e 's|^pruning-interval *=.*|pruning-interval = "19"|' \
   $HOME/.babylond/config/app.toml
   
-sed -ie config.toml
 seed="26d834efe78949b5ed37454a3949d413d8392886@rpc-t.babylon.nodestake.org:666,366f5eb9ffb2efacf850f0aee5f254afe2781c84@176.9.29.51:26656,1b26db77c9701bef02dafa5aa43715330082bb5b@116.202.233.2:20656"
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$seed\"/" ~/.babylond/config/config.toml
 
