@@ -39,6 +39,7 @@ sed -i -e "s%^address = \"tcp://localhost:1317\"%address = \"tcp://0.0.0.0:${BAB
 sed -i '/\[rpc\]/,/\[/{s/^laddr = "tcp:\/\/127\.0\.0\.1:/laddr = "tcp:\/\/0.0.0.0:/}' $HOME/.babylond/config/config.toml
 
 curl -Ls https://raw.githubusercontent.com/babylonlabs-io/networks/030a0c7b29b1156840383e09816b4187560c41e4/bbn-test-5/network-artifacts/genesis.json > $HOME/.babylond/config/genesis.json 
+curl -Ls https://ss-t.babylon.nodestake.org/addrbook.json > $HOME/.babylond/config/addrbook.json 
 
 
 cp $HOME/.babylond/data/priv_validator_state.json $HOME/.babylond/priv_validator_state.json.backup
