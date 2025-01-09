@@ -32,8 +32,8 @@ sed -i \
   $HOME/.babylond/config/app.toml
   
 sed -ie config.toml
-seed="26d834efe78949b5ed37454a3949d413d8392886@rpc-t.babylon.nodestake.org:666"
-sed -i.bak -e "s/^seed *=.*/seed = \"$seed\"/" ~/.babylond/config/config.toml
+seed="26d834efe78949b5ed37454a3949d413d8392886@rpc-t.babylon.nodestake.org:666,366f5eb9ffb2efacf850f0aee5f254afe2781c84@176.9.29.51:26656,1b26db77c9701bef02dafa5aa43715330082bb5b@116.202.233.2:20656"
+sed -i.bak -e "s/^seeds *=.*/seeds = \"$seed\"/" ~/.babylond/config/config.toml
 
 sed -i -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:${BABYLON_PORT}958\"%; s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://127.0.0.1:${BABYLON_PORT}657\"%; s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:${BABYLON_PORT}960\"%; s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${BABYLON_PORT}656\"%; s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${BABYLON_PORT}966\"%" $HOME/.babylond/config/config.toml
 sed -i -e "s%^address = \"tcp://localhost:1317\"%address = \"tcp://0.0.0.0:${BABYLON_PORT}917\"%; s%^address = \":8080\"%address = \":${BABYLON_PORT}980\"%; s%^address = \"localhost:9090\"%address = \"0.0.0.0:${BABYLON_PORT}990\"%; s%^address = \"0.0.0.0:9091\"%address = \"0.0.0.0:${BABYLON_PORT}991\"%; s%:8545%:${BABYLON_PORT}945%; s%:8546%:${BABYLON_PORT}946%; s%:6065%:${BABYLON_PORT}965%" $HOME/.babylond/config/app.toml
