@@ -48,8 +48,9 @@ cp $HOME/.babylond/data/priv_validator_state.json $HOME/.babylond/priv_validator
 rm -rf $HOME/.babylond/data
 rm -rf $HOME/.babylond/wasm
 rm -rf $HOME/.babylond/ibc_08-wasm
-SNAP_NAME=$(curl -s https://ss-t.babylon.nodestake.org/ | egrep -o ">20.*\.tar.lz4" | tr -d ">")
-curl -o - -L https://ss-t.babylon.nodestake.org/${SNAP_NAME}  | lz4 -c -d - | tar -x -C $HOME/.babylond
+#SNAP_NAME=$(curl -s https://ss-t.babylon.nodestake.org/ | egrep -o ">20.*\.tar.lz4" | tr -d ">")
+curl -o - -L https://snapshots.polkachu.com/testnet-snapshots/babylon/babylon_229276.tar.lz4  | lz4 -c -d - | tar -x -C $HOME/.babylond
+#curl -o - -L https://ss-t.babylon.nodestake.org/${SNAP_NAME}  | lz4 -c -d - | tar -x -C $HOME/.babylond
 mv $HOME/.babylond/priv_validator_state.json.backup $HOME/.babylond/data/priv_validator_state.json
 
 
