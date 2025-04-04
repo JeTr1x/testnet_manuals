@@ -35,9 +35,6 @@ services:
       --telemetry-url 'wss://telemetry.polkadot.io/submit/ 5'
       --no-private-ipv4
       --name ValidatorName
-      --rpc-external
-      --rpc-cors all
-      --rpc-port 9944
 
 volumes:
   sxt-testnet-data:
