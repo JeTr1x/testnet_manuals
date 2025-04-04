@@ -1,0 +1,48 @@
+---
+name: 'sxt-testnet-node'
+
+services:
+  sxt-testnet:
+    platform: linux/amd64
+    restart: unless-stopped
+    image: ghcr.io/spaceandtimelabs/sxt-node:testnet-v0.93.0
+    ports:
+      - '9615:9615' # metrics
+      - '9944:9944' # rpc
+      - '30333:30333' # p2p
+    volumes:
+      - sxt-testnet-data:/data
+      - sxt-validator-key:/key
+      - sxt-node-key:/node-key
+    pid: host
+    environment:
+      HYPER_KZG_PUBLIC_SETUP_DIRECTORY: /data
+    command: >
+      --base-path /data
+      --prometheus-port 9615
+      --prometheus-external
+      --pool-limit 10240
+      --pool-kbytes 1024000
+      --chain /opt/chainspecs/testnet-spec.json
+      --keystore-path /key
+      --node-key-file /node-key/subkey.key
+      --bootnodes "/dns/new-validator0.testnet.sxt.network/tcp/30333/p2p/12D3KooWDV5kmYUR5nxruFBfdGX2ZMR43iSe3SfmopZ3sLBFvZzc"
+      --bootnodes "/dns/new-validator1.testnet.sxt.network/tcp/30333/p2p/12D3KooWGAQAg7iZgyn8wnnT8nkDo9NVAPbfubpMgL1mYTRNgjdD"
+      --bootnodes "/dns/new-validator2.testnet.sxt.network/tcp/30333/p2p/12D3KooWLLf8tW3PPbj9MCda9rfypNN5xyZRi1bKoLj8s9UkeJDZ"
+      --validator
+      --port 30333
+      --log info
+      --telemetry-url 'wss://telemetry.polkadot.io/submit/ 5'
+      --no-private-ipv4
+      --name ValidatorName
+      --rpc-external
+      --rpc-cors all
+      --rpc-port 9944
+
+volumes:
+  sxt-testnet-data:
+    external: true
+  sxt-validator-key:
+    external: true
+  sxt-node-key:
+    external: true
