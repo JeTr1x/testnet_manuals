@@ -5,7 +5,10 @@
 read -rp "Enter L1RPC: " L1RPC
 read -rp "Enter CHAINRPC: " CHAINRPC
 
-
+cat /root/mee-node-deployment/chains-testnet/* | grep rpc
+echo ""
+echo ""
+echo ""
 cd mee-node-deployment
 sed -ie 's|"rpc": "https://ethereum-sepolia.blockpi.network/v1/rpc/840aeeac9c2a1733b55ca7aca3d2d287797be72f"|"rpc": "'$CHAINRPC'"|' /root/mee-node-deployment/chains-testnet/11155111.json
 sed -ie 's|"rpc": "https://optimism-sepolia.blockpi.network/v1/rpc/6807fa355fdc9325ea697b5d52efeb4d1adf13f9f"|"rpc": "'$CHAINRPC'"|' /root/mee-node-deployment/chains-testnet/11155420.json
