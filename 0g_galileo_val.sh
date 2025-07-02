@@ -91,9 +91,7 @@ sudo systemctl restart 0ggeth.service
 sudo systemctl enable 0gchaind.service
 sudo systemctl restart 0gchaind.service
 
-sleep 2
-sudo journalctl -u 0gchaind -u 0ggeth 
-sleep 2
+sleep 5
 
 systemctl stop 0gchaind 0ggeth
 
