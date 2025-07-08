@@ -1,0 +1,39 @@
+# Unique ID for this request, constructed from the client address and a 32-bit index.
+# Constructed as (address(client) << 32) | index
+id: 0 # if set to 0, gets overwritten by a random id
+
+# Specifies the requirements for the delivered proof, including the program that must be run,
+# and the constraints on the journal's value, which define the statement to be proven.
+requirements:
+    imageId: "0x34a5c9394fb2fd3298ece07c16ec2ed009f6029a360f90f4e93933b55e2184d4"
+    predicate:
+        predicateType: DigestMatch
+        data: "0x6c23592f1ddb25fb3ee7d8387e918803031b7e718ca45826a7eedfb556ffff7f"
+    callback:
+        addr: "0x0000000000000000000000000000000000000000"
+        gasLimit: 0
+    selector: "00000000"
+
+# A public URI where the program (i.e. image) can be downloaded. This URI will be accessed by
+# provers that are evaluating whether to bid on the request.
+imageUrl: "https://dweb.link/ipfs/bafkreicmwk3xlxbozbp5h63xyywocc7dltt376hn4mnmhk7ojqdcbrkqzi"
+
+# Input to be provided to the zkVM guest execution.
+# The input data is a encoded guest environment.
+# See crates/boundless-market/src/input.rs for additional details.
+input:
+    inputType: Inline
+    data: "0x0181a5737464696edc00100000cce010000000004b2f78cce142ccebccc605"
+
+# Offer specifying how much the client is willing to pay to have this request fulfilled
+offer:
+    minPrice: 10000000
+    maxPrice: 20000000
+    biddingStart: 0 # if set to 0, gets overwritten by the current UNIX timestamp
+    rampUpPeriod: 300
+    timeout: 1800 # 1 hor
+    lockTimeout: 900 # 45 minutes
+    lockStake: 100000 # 0.1 USDC
+
+
+
