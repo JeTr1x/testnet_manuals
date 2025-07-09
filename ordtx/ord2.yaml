@@ -31,6 +31,6 @@ offer:
     maxPrice: 70000000
     biddingStart: 0 # if set to 0, gets overwritten by the current UNIX timestamp
     rampUpPeriod: 300
-    timeout: 1800 # 1 hor
-    lockTimeout: 900 # 45 minutes
+    timeout: 4500 # 1 hor
+    lockTimeout: 3600 # 45 minutes
     lockStake: 10000 # 0.1 USDC
