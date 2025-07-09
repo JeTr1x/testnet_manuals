@@ -33,4 +33,4 @@ offer:
     rampUpPeriod: 300
     timeout: 1800 # 1 hor
     lockTimeout: 900 # 45 minutes
-    lockStake: 100000 # 0.1 USDC
+    lockStake: 10000 # 0.1 USDC
