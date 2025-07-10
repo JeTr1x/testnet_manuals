@@ -48,11 +48,11 @@ max_file_size = 50_000_000
 # Max concurrent locks
 #
 # Maximum number of concurrent proofs that can be processed at once
-max_concurrent_proofs = 4
+max_concurrent_proofs = 1
 # Maximum number of orders to concurrently work on pricing
 #
 # Used to limit pricing tasks spawned to prevent overwhelming the system
-#max_concurrent_preflights = 4
+max_concurrent_preflights = 1
 # Order pricing priority mode
 #
 # Determines how orders are prioritized for pricing. Options:
@@ -138,7 +138,7 @@ req_retry_sleep_ms = 500
 # This is separate from the request retry count, as the proving process
 # is a multi-step process involving multiple API calls to create a proof
 # job and then polling for the proof job to complete.
-proof_retry_count = 1
+proof_retry_count = 2
 # Number of milliseconds to sleep between proof retries.
 proof_retry_sleep_ms = 500
 # Set builder guest program (ELF) path
